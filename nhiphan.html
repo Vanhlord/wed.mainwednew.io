@@ -51,12 +51,12 @@
         const targetId = btn.getAttribute('data-target');
         const text = document.getElementById(targetId).innerText;
         if (!text.trim()) {
-          btn.innerText = '❌';
+          btn.innerText = 'Không sao chép được!❌';
           setTimeout(() => btn.innerText = '📋', 1000);
           return;
         }
         navigator.clipboard.writeText(text).then(() => {
-          btn.innerText = '✅';
+          btn.innerText = 'Đã sao chép!✅';
           setTimeout(() => btn.innerText = '📋', 1000);
         });
       });
@@ -64,4 +64,5 @@
   </script>
 </body>
 </html>
+
 
