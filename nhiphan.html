@@ -21,7 +21,10 @@
       <button id="convertToText">Nhị phân → Chữ</button>
     </div>
 
-    <div class="output" id="output"></div>
+       <div class="output-box">
+      <div class="output" id="output"></div>
+      <button class="copy-btn" data-target="output">📋</button>
+    </div>
   </section>
 
   <!-- 🟡 PHẦN MORSE -->
@@ -34,9 +37,31 @@
       <button id="morseToText">Morse → Chữ</button>
     </div>
 
-    <div class="output" id="morseOutput"></div>
+   <div class="output-box">
+      <div class="output" id="morseOutput"></div>
+      <button class="copy-btn" data-target="morseOutput">📋</button>
+    </div>
   </section>
 
   <script src="nhiphan.js"></script>
+    <script>
+    // Nút sao chép
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        const text = document.getElementById(targetId).innerText;
+        if (!text.trim()) {
+          btn.innerText = '❌';
+          setTimeout(() => btn.innerText = '📋', 1000);
+          return;
+        }
+        navigator.clipboard.writeText(text).then(() => {
+          btn.innerText = '✅';
+          setTimeout(() => btn.innerText = '📋', 1000);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
+
