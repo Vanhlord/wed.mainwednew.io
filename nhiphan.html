@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chuyển đổi chữ & mã 💡</title>
+  <link rel="stylesheet" href="nhiphan.css">
+</head>
+<body>
+  <video autoplay muted loop id="bgVideo">
+    <source src="https://cdn.pixabay.com/video/2023/02/11/150150-797999302_tiny.mp4" type="video/mp4">
+  </video>
+
+  <!-- 🟢 PHẦN NHỊ PHÂN -->
+  <section class="convert-box">
+    <h2>Chuyển đổi chữ ↔ Nhị phân</h2>
+    <textarea id="inputText" placeholder="Nhập chữ hoặc mã nhị phân vào đây..."></textarea>
+
+    <div class="btn-group">
+      <button id="convertToBinary">Chữ → Nhị phân</button>
+      <button id="convertToText">Nhị phân → Chữ</button>
+    </div>
+
+    <div class="output" id="output"></div>
+  </section>
+
+  <!-- 🟡 PHẦN MORSE -->
+  <section class="convert-box">
+    <h2>Chuyển đổi chữ ↔ Mã Morse</h2>
+    <textarea id="morseInput" placeholder="Nhập chữ hoặc mã Morse vào đây..."></textarea>
+
+    <div class="btn-group">
+      <button id="textToMorse">Chữ → Morse</button>
+      <button id="morseToText">Morse → Chữ</button>
+    </div>
+
+    <div class="output" id="morseOutput"></div>
+  </section>
+
+  <script src="nhiphan.js"></script>
+</body>
+</html>
