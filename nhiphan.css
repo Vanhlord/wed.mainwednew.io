@@ -12,7 +12,7 @@
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background: url('https://cdn.pixabay.com/photo/2016/11/29/10/07/space-1867271_1280.jpg') no-repeat center center;
+  background: url('https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474067Ljc/anh-nen-4k-minecraft-hoang-hon_075928115.jpg') no-repeat center center;
   background-size: cover;
   z-index: -1;
   filter: brightness(40%) blur(2px);
@@ -199,5 +199,6 @@ button:active {
     padding: 10px 12px;
   }
 }
+
 
 
