@@ -353,7 +353,53 @@ footer p {
   background: #ff3b3b;
   box-shadow: 0 0 10px #ff3b3b;
 }
+/* 📱 Responsive cho mobile */
+@media (max-width: 768px) {
+  header {
+    top: 15px;
+  }
+
+  .logo {
+    width: 250px; /* nhỏ lại cho vừa màn hình */
+    animation: floatLogo 4s ease-in-out infinite alternate;
+  }
+
+  main {
+    margin-top: 180px; /* rút gọn khoảng cách logo */
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .server-box {
+    width: 90%; /* chiếm gần hết màn hình */
+    padding: 20px;
+  }
+
+  .btn-group, .download-buttons, .contact-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #copyBtn, #playBtn, .download-buttons a, #menuBtn {
+    width: 80%; /* vừa màn hình */
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  #contactMenu {
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%) scale(0) translateY(-10px);
+  }
+
+  footer {
+    font-size: 0.8rem;
+    padding: 10px 0;
+  }
+}
+
 /* 🌐 header ============================================================================================*/
+
 
 
 
