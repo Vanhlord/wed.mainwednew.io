@@ -77,4 +77,121 @@ document.getElementById('morseToText').addEventListener('click', () => {
   const code = morseInput.value.trim();
   if (!code) return morseOutput.innerText = '⚠️ Nhập mã Morse vô đi nha!';
   morseOutput.innerText = morseToText(code);
+
 });
+// 🧠 Binary & Morse đã có sẵn ở trên — thêm các mã khác bên dưới nha
+
+// ===== ASCII =====
+function textToASCII(text) {
+  return text.split('').map(c => c.charCodeAt(0)).join(' ');
+}
+function asciiToText(ascii) {
+  return ascii.split(' ').map(c => String.fromCharCode(c)).join('');
+}
+
+// ===== HEX =====
+function textToHex(text) {
+  return text.split('').map(c => c.charCodeAt(0).toString(16)).join(' ');
+}
+function hexToText(hex) {
+  return hex.split(' ').map(h => String.fromCharCode(parseInt(h, 16))).join('');
+}
+
+// ===== BASE64 =====
+function textToBase64(text) {
+  return btoa(unescape(encodeURIComponent(text)));
+}
+function base64ToText(b64) {
+  return decodeURIComponent(escape(atob(b64)));
+}
+
+// ===== CAESAR CIPHER =====
+function caesarEncrypt(text, shift = 3) {
+  return text.replace(/[a-z]/gi, c => {
+    const base = c === c.toLowerCase() ? 97 : 65;
+    return String.fromCharCode((c.charCodeAt(0) - base + shift) % 26 + base);
+  });
+}
+function caesarDecrypt(text, shift = 3) {
+  return caesarEncrypt(text, 26 - shift);
+}
+
+// ===== ROT13 =====
+function rot13(text) {
+  return text.replace(/[a-z]/gi, c => {
+    const base = c <= 'Z' ? 65 : 97;
+    return String.fromCharCode(((c.charCodeAt(0) - base + 13) % 26) + base);
+  });
+}
+
+// ===== ATBASH =====
+function atbash(text) {
+  return text.replace(/[a-z]/gi, c => {
+    const base = c <= 'Z' ? 65 : 97;
+    return String.fromCharCode(25 - (c.charCodeAt(0) - base) + base);
+  });
+}
+
+// ===== SGA (Standard Galactic Alphabet – Enchant Minecraft) =====
+const sgaMap = {
+  a: 'ᔑ', b: 'ʖ', c: 'ᓵ', d: '↸', e: 'ᒷ', f: '⎓', g: '⊣',
+  h: '⍑', i: '╎', j: '⋮', k: 'ꖌ', l: 'ꖎ', m: 'ᒲ', n: 'リ',
+  o: '𝙹', p: '!¡', q: 'ᑑ', r: '∷', s: 'ᓭ', t: 'ℸ', u: '⚍',
+  v: '⍊', w: '∴', x: '·/', y: '||', z: '⨅'
+};
+function textToSGA(text) {
+  return text.toLowerCase().split('').map(c => sgaMap[c] || c).join('');
+}
+function sgaToText(sga) {
+  const reverse = Object.fromEntries(Object.entries(sgaMap).map(([k, v]) => [v, k]));
+  return sga.split(/(\s+|!¡|·\/|\|\||⨅|⍑|⎓|⍊|⨅|[ᔑʖᓵ↸ᒷ⊣╎⋮ꖌꖎᒲリ𝙹ᑑ∷ᓭℸ⚍∴⨅])/g).map(c => reverse[c] || c).join('');
+}
+
+// ===== GẮN VÀO NÚT XỬ LÝ =====
+function encode(type) {
+  let input = document.getElementById(`${type}Input`).value;
+  let output = '';
+
+  switch(type) {
+    case 'ascii': output = textToASCII(input); break;
+    case 'hex': output = textToHex(input); break;
+    case 'base64': output = textToBase64(input); break;
+    case 'caesar':
+      const shiftE = parseInt(document.getElementById('shiftValue').value || 3);
+      output = caesarEncrypt(input, shiftE);
+      break;
+    case 'rot13': output = rot13(input); break;
+    case 'atbash': output = atbash(input); break;
+    case 'sga': output = textToSGA(input); break;
+  }
+
+  document.getElementById(`${type}Output`).value = output;
+}
+
+function decode(type) {
+  let input = document.getElementById(`${type}Output`).value;
+  let output = '';
+
+  switch(type) {
+    case 'ascii': output = asciiToText(input); break;
+    case 'hex': output = hexToText(input); break;
+    case 'base64': output = base64ToText(input); break;
+    case 'caesar':
+      const shiftD = parseInt(document.getElementById('shiftValue').value || 3);
+      output = caesarDecrypt(input, shiftD);
+      break;
+    case 'rot13': output = rot13(input); break;
+    case 'atbash': output = atbash(input); break;
+    case 'sga': output = sgaToText(input); break;
+  }
+
+  document.getElementById(`${type}Input`).value = output;
+}
+
+// ===== COPY NÚT =====
+function copyText(id) {
+  const text = document.getElementById(id);
+  text.select();
+  document.execCommand("copy");
+  alert("Đã copy ✨");
+}
