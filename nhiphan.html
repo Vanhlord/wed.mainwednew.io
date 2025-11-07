@@ -39,6 +39,107 @@
       <button class="copy-btn" data-target="morseOutput">📋</button>
     </div>
   </section>
+    <!-- 🌈 NGĂN CÁCH -->
+  <h2 class="section-title">CÁC LOẠI MÃ KHÁC 🔐</h2>
+
+  <!-- 🧩 ASCII -->
+  <section class="convert-box">
+    <h2>Chuyển đổi chữ ↔ Mã ASCII</h2>
+    <textarea id="asciiInput" placeholder="Nhập chữ hoặc mã ASCII vào đây..."></textarea>
+    <div class="btn-group">
+      <button id="textToAscii">Chữ → ASCII</button>
+      <button id="asciiToText">ASCII → Chữ</button>
+    </div>
+    <div class="output-box">
+      <div class="output" id="asciiOutput"></div>
+      <button class="copy-btn" data-target="asciiOutput">📋</button>
+    </div>
+  </section>
+
+  <!-- 💾 HEX -->
+  <section class="convert-box">
+    <h2>Chuyển đổi chữ ↔ Mã Hexadecimal</h2>
+    <textarea id="hexInput" placeholder="Nhập chữ hoặc mã hex vào đây..."></textarea>
+    <div class="btn-group">
+      <button id="textToHex">Chữ → Hex</button>
+      <button id="hexToText">Hex → Chữ</button>
+    </div>
+    <div class="output-box">
+      <div class="output" id="hexOutput"></div>
+      <button class="copy-btn" data-target="hexOutput">📋</button>
+    </div>
+  </section>
+
+  <!-- 📦 BASE64 -->
+  <section class="convert-box">
+    <h2>Chuyển đổi chữ ↔ Base64</h2>
+    <textarea id="base64Input" placeholder="Nhập chữ hoặc mã Base64 vào đây..."></textarea>
+    <div class="btn-group">
+      <button id="textToBase64">Chữ → Base64</button>
+      <button id="base64ToText">Base64 → Chữ</button>
+    </div>
+    <div class="output-box">
+      <div class="output" id="base64Output"></div>
+      <button class="copy-btn" data-target="base64Output">📋</button>
+    </div>
+  </section>
+
+  <!-- 🔐 CAESAR -->
+  <section class="convert-box">
+    <h2>Chuyển đổi chữ ↔ Mã Caesar</h2>
+    <textarea id="caesarInput" placeholder="Nhập chữ hoặc mã Caesar..."></textarea>
+    <input type="number" id="shiftValue" placeholder="Nhập độ dịch (shift)" min="1" max="25">
+    <div class="btn-group">
+      <button id="textToCaesar">Mã hóa Caesar</button>
+      <button id="caesarToText">Giải mã Caesar</button>
+    </div>
+    <div class="output-box">
+      <div class="output" id="caesarOutput"></div>
+      <button class="copy-btn" data-target="caesarOutput">📋</button>
+    </div>
+  </section>
+
+  <!-- 🔁 ROT13 -->
+  <section class="convert-box">
+    <h2>Chuyển đổi chữ ↔ ROT13</h2>
+    <textarea id="rot13Input" placeholder="Nhập chữ hoặc mã ROT13 vào đây..."></textarea>
+    <div class="btn-group">
+      <button id="textToRot13">Chuyển ROT13</button>
+      <button id="rot13ToText">ROT13 → Chữ</button>
+    </div>
+    <div class="output-box">
+      <div class="output" id="rot13Output"></div>
+      <button class="copy-btn" data-target="rot13Output">📋</button>
+    </div>
+  </section>
+
+  <!-- 🪞 ATBASH -->
+  <section class="convert-box">
+    <h2>Chuyển đổi chữ ↔ Mã Atbash</h2>
+    <textarea id="atbashInput" placeholder="Nhập chữ hoặc mã Atbash..."></textarea>
+    <div class="btn-group">
+      <button id="textToAtbash">Chữ → Atbash</button>
+      <button id="atbashToText">Atbash → Chữ</button>
+    </div>
+    <div class="output-box">
+      <div class="output" id="atbashOutput"></div>
+      <button class="copy-btn" data-target="atbashOutput">📋</button>
+    </div>
+  </section>
+
+  <!-- 🌌 SGA (ENCHANT MINECRAFT) -->
+  <section class="convert-box">
+    <h2>Chuyển đổi chữ ↔ Mã SGA (Minecraft Enchant)</h2>
+    <textarea id="sgaInput" placeholder="Nhập chữ hoặc mã SGA..."></textarea>
+    <div class="btn-group">
+      <button id="textToSGA">Chữ → SGA</button>
+      <button id="sgaToText">SGA → Chữ</button>
+    </div>
+    <div class="output-box">
+      <div class="output" id="sgaOutput"></div>
+      <button class="copy-btn" data-target="sgaOutput">📋</button>
+    </div>
+  </section>
 
   <script src="nhiphan.js"></script>
     <script>
@@ -64,6 +165,7 @@
   <p>Made with Vanh Lord</p>
   </footer>
 </html>
+
 
 
 
