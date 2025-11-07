@@ -32,6 +32,7 @@ document.getElementById('convertToText').addEventListener('click', () => {
   }
 });
 
+
 // ------------------- MORSE -------------------
 const morseInput = document.getElementById('morseInput');
 const morseOutput = document.getElementById('morseOutput');
@@ -45,15 +46,13 @@ const morseCode = {
   'Z': '--..',
   '0': '-----', '1': '.----', '2': '..---', '3': '...--',
   '4': '....-', '5': '.....', '6': '-....', '7': '--...',
-  '8': '---..', '9': '----.',
-  ' ': '/'
+  '8': '---..', '9': '----.', ' ': '/'
 };
 
-// 🔤 Hàm loại bỏ dấu tiếng Việt trước khi đổi Morse
 function removeVietnameseTones(str) {
   return str
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '') // bỏ dấu thanh
+    .replace(/[\u0300-\u036f]/g, '')
     .replace(/đ/g, 'd').replace(/Đ/g, 'D');
 }
 
@@ -77,9 +76,10 @@ document.getElementById('morseToText').addEventListener('click', () => {
   const code = morseInput.value.trim();
   if (!code) return morseOutput.innerText = '⚠️ Nhập mã Morse vô đi nha!';
   morseOutput.innerText = morseToText(code);
-
 });
-// 🧠 Binary & Morse đã có sẵn ở trên — thêm các mã khác bên dưới nha
+
+
+// ------------------- CÁC LOẠI MÃ KHÁC -------------------
 
 // ===== ASCII =====
 function textToASCII(text) {
@@ -97,12 +97,12 @@ function hexToText(hex) {
   return hex.split(' ').map(h => String.fromCharCode(parseInt(h, 16))).join('');
 }
 
-// ===== BASE64 =====
+// ===== BASE64 ===== (phiên bản chuẩn không lỗi)
 function textToBase64(text) {
-  return btoa(unescape(encodeURIComponent(text)));
+  return btoa(new TextEncoder().encode(text).reduce((a, b) => a + String.fromCharCode(b), ''));
 }
 function base64ToText(b64) {
-  return decodeURIComponent(escape(atob(b64)));
+  return new TextDecoder().decode(Uint8Array.from(atob(b64), c => c.charCodeAt(0)));
 }
 
 // ===== CAESAR CIPHER =====
@@ -139,13 +139,20 @@ const sgaMap = {
   o: '𝙹', p: '!¡', q: 'ᑑ', r: '∷', s: 'ᓭ', t: 'ℸ', u: '⚍',
   v: '⍊', w: '∴', x: '·/', y: '||', z: '⨅'
 };
+
 function textToSGA(text) {
   return text.toLowerCase().split('').map(c => sgaMap[c] || c).join('');
 }
+
 function sgaToText(sga) {
   const reverse = Object.fromEntries(Object.entries(sgaMap).map(([k, v]) => [v, k]));
-  return sga.split(/(\s+|!¡|·\/|\|\||⨅|⍑|⎓|⍊|⨅|[ᔑʖᓵ↸ᒷ⊣╎⋮ꖌꖎᒲリ𝙹ᑑ∷ᓭℸ⚍∴⨅])/g).map(c => reverse[c] || c).join('');
+  let result = '';
+  for (let symbol of sga.split('')) {
+    result += reverse[symbol] || symbol;
+  }
+  return result;
 }
+
 
 // ===== GẮN VÀO NÚT XỬ LÝ =====
 function encode(type) {
@@ -188,10 +195,16 @@ function decode(type) {
   document.getElementById(`${type}Input`).value = output;
 }
 
-// ===== COPY NÚT =====
-function copyText(id) {
-  const text = document.getElementById(id);
-  text.select();
-  document.execCommand("copy");
-  alert("Đã copy ✨");
+
+// ===== COPY NÚT (phiên bản hiện đại) =====
+async function copyText(id) {
+  const text = document.getElementById(id).value;
+  try {
+    await navigator.clipboard.writeText(text);
+    alert("✨ Đã copy xong rồi đó nha!");
+  } catch (err) {
+    alert("❌ Không thể copy, thử lại đi nè!");
+  }
 }
+
+
