@@ -105,16 +105,7 @@ function base64ToText(b64) {
   return new TextDecoder().decode(Uint8Array.from(atob(b64), c => c.charCodeAt(0)));
 }
 
-// ===== CAESAR CIPHER =====
-function caesarEncrypt(text, shift = 3) {
-  return text.replace(/[a-z]/gi, c => {
-    const base = c === c.toLowerCase() ? 97 : 65;
-    return String.fromCharCode((c.charCodeAt(0) - base + shift) % 26 + base);
-  });
-}
-function caesarDecrypt(text, shift = 3) {
-  return caesarEncrypt(text, 26 - shift);
-}
+
 
 // ===== ROT13 =====
 function rot13(text) {
@@ -141,70 +132,129 @@ const sgaMap = {
 };
 
 function textToSGA(text) {
-  return text.toLowerCase().split('').map(c => sgaMap[c] || c).join('');
+  const cleanText = removeVietnameseTones(text.toLowerCase());
+  return cleanText.split('').map(c => sgaMap[c] || c).join('');
 }
 
 function sgaToText(sga) {
   const reverse = Object.fromEntries(Object.entries(sgaMap).map(([k, v]) => [v, k]));
+  // Sắp xếp theo độ dài giảm dần để ưu tiên ký tự dài
+  const sortedKeys = Object.keys(reverse).sort((a, b) => b.length - a.length);
   let result = '';
-  for (let symbol of sga.split('')) {
-    result += reverse[symbol] || symbol;
+  let i = 0;
+  while (i < sga.length) {
+    let found = false;
+    for (let key of sortedKeys) {
+      if (sga.startsWith(key, i)) {
+        result += reverse[key];
+        i += key.length;
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      result += sga[i];
+      i++;
+    }
   }
   return result;
 }
 
 
-// ===== GẮN VÀO NÚT XỬ LÝ =====
-function encode(type) {
-  let input = document.getElementById(`${type}Input`).value;
-  let output = '';
+// ===== ASCII =====
+document.getElementById('textToAscii').addEventListener('click', () => {
+  const input = document.getElementById('asciiInput').value.trim();
+  if (!input) return document.getElementById('asciiOutput').innerText = '⚠️ Nhập chữ vô đi nè!';
+  document.getElementById('asciiOutput').innerText = textToASCII(input);
+});
 
-  switch(type) {
-    case 'ascii': output = textToASCII(input); break;
-    case 'hex': output = textToHex(input); break;
-    case 'base64': output = textToBase64(input); break;
-    case 'caesar':
-      const shiftE = parseInt(document.getElementById('shiftValue').value || 3);
-      output = caesarEncrypt(input, shiftE);
-      break;
-    case 'rot13': output = rot13(input); break;
-    case 'atbash': output = atbash(input); break;
-    case 'sga': output = textToSGA(input); break;
-  }
-
-  document.getElementById(`${type}Output`).value = output;
-}
-
-function decode(type) {
-  let input = document.getElementById(`${type}Output`).value;
-  let output = '';
-
-  switch(type) {
-    case 'ascii': output = asciiToText(input); break;
-    case 'hex': output = hexToText(input); break;
-    case 'base64': output = base64ToText(input); break;
-    case 'caesar':
-      const shiftD = parseInt(document.getElementById('shiftValue').value || 3);
-      output = caesarDecrypt(input, shiftD);
-      break;
-    case 'rot13': output = rot13(input); break;
-    case 'atbash': output = atbash(input); break;
-    case 'sga': output = sgaToText(input); break;
-  }
-
-  document.getElementById(`${type}Input`).value = output;
-}
-
-
-// ===== COPY NÚT (phiên bản hiện đại) =====
-async function copyText(id) {
-  const text = document.getElementById(id).value;
+document.getElementById('asciiToText').addEventListener('click', () => {
+  const input = document.getElementById('asciiInput').value.trim();
+  if (!input) return document.getElementById('asciiOutput').innerText = '⚠️ Nhập mã ASCII vô đi nha!';
   try {
-    await navigator.clipboard.writeText(text);
-    alert("✨ Đã copy xong rồi đó nha!");
-  } catch (err) {
-    alert("❌ Không thể copy, thử lại đi nè!");
+    document.getElementById('asciiOutput').innerText = asciiToText(input);
+  } catch {
+    document.getElementById('asciiOutput').innerText = '❌ Sai định dạng ASCII rồi á!';
   }
-}
+});
+
+// ===== HEX =====
+document.getElementById('textToHex').addEventListener('click', () => {
+  const input = document.getElementById('hexInput').value.trim();
+  if (!input) return document.getElementById('hexOutput').innerText = '⚠️ Nhập chữ vô đi nè!';
+  document.getElementById('hexOutput').innerText = textToHex(input);
+});
+
+document.getElementById('hexToText').addEventListener('click', () => {
+  const input = document.getElementById('hexInput').value.trim();
+  if (!input) return document.getElementById('hexOutput').innerText = '⚠️ Nhập mã hex vô đi nha!';
+  try {
+    document.getElementById('hexOutput').innerText = hexToText(input);
+  } catch {
+    document.getElementById('hexOutput').innerText = '❌ Sai định dạng hex rồi á!';
+  }
+});
+
+// ===== BASE64 =====
+document.getElementById('textToBase64').addEventListener('click', () => {
+  const input = document.getElementById('base64Input').value.trim();
+  if (!input) return document.getElementById('base64Output').innerText = '⚠️ Nhập chữ vô đi nè!';
+  try {
+    document.getElementById('base64Output').innerText = textToBase64(input);
+  } catch {
+    document.getElementById('base64Output').innerText = '❌ Lỗi chuyển đổi Base64!';
+  }
+});
+
+document.getElementById('base64ToText').addEventListener('click', () => {
+  const input = document.getElementById('base64Input').value.trim();
+  if (!input) return document.getElementById('base64Output').innerText = '⚠️ Nhập mã Base64 vô đi nha!';
+  try {
+    document.getElementById('base64Output').innerText = base64ToText(input);
+  } catch {
+    document.getElementById('base64Output').innerText = '❌ Sai định dạng Base64 rồi á!';
+  }
+});
+
+
+
+// ===== ROT13 =====
+document.getElementById('textToRot13').addEventListener('click', () => {
+  const input = document.getElementById('rot13Input').value.trim();
+  if (!input) return document.getElementById('rot13Output').innerText = '⚠️ Nhập chữ vô đi nè!';
+  document.getElementById('rot13Output').innerText = rot13(input);
+});
+
+document.getElementById('rot13ToText').addEventListener('click', () => {
+  const input = document.getElementById('rot13Input').value.trim();
+  if (!input) return document.getElementById('rot13Output').innerText = '⚠️ Nhập mã ROT13 vô đi nha!';
+  document.getElementById('rot13Output').innerText = rot13(input);
+});
+
+// ===== ATBASH =====
+document.getElementById('textToAtbash').addEventListener('click', () => {
+  const input = document.getElementById('atbashInput').value.trim();
+  if (!input) return document.getElementById('atbashOutput').innerText = '⚠️ Nhập chữ vô đi nè!';
+  document.getElementById('atbashOutput').innerText = atbash(input);
+});
+
+document.getElementById('atbashToText').addEventListener('click', () => {
+  const input = document.getElementById('atbashInput').value.trim();
+  if (!input) return document.getElementById('atbashOutput').innerText = '⚠️ Nhập mã Atbash vô đi nha!';
+  document.getElementById('atbashOutput').innerText = atbash(input);
+});
+
+// ===== SGA =====
+document.getElementById('textToSGA').addEventListener('click', () => {
+  const input = document.getElementById('sgaInput').value.trim();
+  if (!input) return document.getElementById('sgaOutput').innerText = '⚠️ Nhập chữ vô đi nè!';
+  document.getElementById('sgaOutput').innerText = textToSGA(input);
+});
+
+document.getElementById('sgaToText').addEventListener('click', () => {
+  const input = document.getElementById('sgaInput').value.trim();
+  if (!input) return document.getElementById('sgaOutput').innerText = '⚠️ Nhập mã SGA vô đi nha!';
+  document.getElementById('sgaOutput').innerText = sgaToText(input);
+});
 
 
