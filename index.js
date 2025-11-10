@@ -207,7 +207,6 @@ setTimeout(() => {
 
 });
 // phần thông báo trang chủ
->
 function showPopup() {
   // Tạo overlay
   const overlay = document.createElement('div');
@@ -277,6 +276,7 @@ function showPopup() {
   `;
   document.head.appendChild(style);
 }
+
 
 
 
