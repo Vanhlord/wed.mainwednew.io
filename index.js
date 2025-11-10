@@ -205,7 +205,37 @@ setTimeout(() => {
   }
 }, 1000);
 
-
-
 });
+
+function showPopup() {
+  // Tạo lớp mờ
+  const overlay = document.createElement('div');
+  overlay.style = `
+    position:fixed;inset:0;background:rgba(0,0,0,0.6);
+    display:flex;justify-content:center;align-items:center;z-index:9999;
+  `;
+
+  // Tạo bảng thông báo
+  const popup = document.createElement('div');
+  popup.style = `
+    background:white;padding:20px 30px;border-radius:12px;
+    text-align:center;box-shadow:0 0 20px rgba(0,0,0,0.3);
+  `;
+  popup.innerHTML = `
+    <h2>Chào mừng Đại ca 😎</h2>
+    <p>Web này nhớ anh dữ lắm á~</p>
+    <button style="
+      margin-top:10px;padding:6px 14px;border:none;
+      border-radius:6px;background:#3498db;color:white;cursor:pointer;
+    ">Đóng</button>
+  `;
+
+  // Khi bấm "Đóng" thì ẩn đi
+  popup.querySelector('button').onclick = () => overlay.remove();
+
+  // Gắn popup vào overlay và overlay vào body
+  overlay.appendChild(popup);
+  document.body.appendChild(overlay);
+}
+
 
