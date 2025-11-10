@@ -206,36 +206,77 @@ setTimeout(() => {
 }, 1000);
 
 });
-
+// phần thông báo trang chủ
+>
 function showPopup() {
-  // Tạo lớp mờ
+  // Tạo overlay
   const overlay = document.createElement('div');
   overlay.style = `
-    position:fixed;inset:0;background:rgba(0,0,0,0.6);
-    display:flex;justify-content:center;align-items:center;z-index:9999;
+    position:fixed;inset:0;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter:blur(5px);
+    display:flex;justify-content:center;align-items:center;
+    z-index:9999;
+    animation:fadeIn 0.4s ease;
   `;
 
-  // Tạo bảng thông báo
+  // Tạo popup
   const popup = document.createElement('div');
   popup.style = `
-    background:white;padding:20px 30px;border-radius:12px;
-    text-align:center;box-shadow:0 0 20px rgba(0,0,0,0.3);
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,0.25);
+    border-radius:16px;
+    padding:22px 28px;
+    text-align:center;
+    color:white;
+    width:85%;
+    max-width:340px;
+    box-shadow:0 0 25px rgba(0,0,0,0.2);
+    transform:scale(0.8);
+    opacity:0;
+    animation:popIn 0.4s ease forwards;
   `;
   popup.innerHTML = `
-    <h2>Chào mừng Đại ca 😎</h2>
-    <p>Web này nhớ anh dữ lắm á~</p>
+    <h2 style="margin:0 0 10px;font-size:1.3em;">✨ Xin chào Đại ca ✨</h2>
+    <p style="margin:0 0 15px;font-size:0.95em;">Trang web đã sẵn sàng phục vụ đại ca 😎</p>
     <button style="
-      margin-top:10px;padding:6px 14px;border:none;
-      border-radius:6px;background:#3498db;color:white;cursor:pointer;
+      padding:8px 16px;
+      border:none;
+      border-radius:8px;
+      background:rgba(255,255,255,0.3);
+      color:white;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.25s;
     ">Đóng</button>
   `;
 
-  // Khi bấm "Đóng" thì ẩn đi
-  popup.querySelector('button').onclick = () => overlay.remove();
+  popup.querySelector('button').onclick = () => {
+    popup.style.animation = 'popOut 0.3s ease forwards';
+    overlay.style.animation = 'fadeOut 0.3s ease forwards';
+    setTimeout(() => overlay.remove(), 300);
+  };
 
-  // Gắn popup vào overlay và overlay vào body
   overlay.appendChild(popup);
   document.body.appendChild(overlay);
+
+  // Tạo style động cho animation
+  const style = document.createElement('style');
+  style.innerHTML = `
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+    @keyframes fadeOut { from {opacity:1;} to {opacity:0;} }
+    @keyframes popIn {
+      0% {transform:scale(0.8) translateY(20px);opacity:0;}
+      100% {transform:scale(1) translateY(0);opacity:1;}
+    }
+    @keyframes popOut {
+      0% {transform:scale(1) translateY(0);opacity:1;}
+      100% {transform:scale(0.8) translateY(20px);opacity:0;}
+    }
+  `;
+  document.head.appendChild(style);
 }
+
 
 
