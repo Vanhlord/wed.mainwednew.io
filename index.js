@@ -109,7 +109,7 @@ document.getElementById("playBtn").addEventListener("click", () => {
       popup.classList.remove("active");
       if (!cancelled) {
         setTimeout(() => {
-          window.location.href = `minecraft://?addExternalServer=Server của anh|${ip}:${port}`;
+          window.location.href = `minecraft://?addExternalServer=VanhLoreVanhLore|${ip}:${port}`;
         }, 400);
       }
     }
@@ -206,7 +206,7 @@ setTimeout(() => {
 }, 1000);
 
 });
-// phần thông báo trang chủ
+// phần thông báo trang chủ===============================================================================================
 function showPopup() {
   // Tạo overlay
   const overlay = document.createElement('div');
@@ -237,8 +237,9 @@ function showPopup() {
     animation:popIn 0.4s ease forwards;
   `;
   popup.innerHTML = `
-    <h2 style="margin:0 0 10px;font-size:1.3em;">✨ Xin chào Đại ca ✨</h2>
-    <p style="margin:0 0 15px;font-size:0.95em;">Trang web đã sẵn sàng phục vụ đại ca 😎</p>
+    <h2 style="margin:0 0 10px;font-size:1.3em;">Chào bạn</h2>
+    <p style="margin:0 0 15px;font-size:0.95em;">Trang web đã cập nhập phiên bản mới 1.21.121<br>
+    Các tính năng mới sẽ được thêm...!</p>
     <button style="
       padding:8px 16px;
       border:none;
@@ -276,6 +277,7 @@ function showPopup() {
   `;
   document.head.appendChild(style);
 }
+
 
 
 
