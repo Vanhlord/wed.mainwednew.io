@@ -250,7 +250,7 @@ function showPopup() {
       font-weight:600;
       cursor:pointer;
       transition:0.25s;
-    ">Đóng</button>
+    ">Đóng thông báo</button>
   `;
 
   popup.querySelector('button').onclick = () => {
@@ -278,6 +278,7 @@ function showPopup() {
   `;
   document.head.appendChild(style);
 }
+
 
 
 
