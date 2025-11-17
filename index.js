@@ -278,27 +278,6 @@ function showPopup() {
   `;
   document.head.appendChild(style);
 }
-//phần api hiển thị số lượt tải xuống
-fetch('/api/stats')
-  .then(r => r.json())
-  .then(d => {
-    document.getElementById('v121130').textContent += ` (${d.dl121130})`;
-    document.getElementById('v121123').textContent += ` (${d.dl121123})`;
-    document.getElementById('v121121p').textContent += ` (${d.dl121121p})`;
-    document.getElementById('v121121').textContent += ` (${d.dl121121})`;
-  });
-
-function download(id, link) {
-  // nếu chưa tải thì mới cộng 1
-  if (!localStorage.getItem(id)) {
-    fetch(`/api/plus?v=${id}`);
-    localStorage.setItem(id, "1");
-  }
-
-  // chuyển sang link tải thật
-  window.location.href = link;
-}
-
 
 
 
