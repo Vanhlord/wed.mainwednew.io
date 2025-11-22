@@ -279,6 +279,54 @@ function showPopup() {
   document.head.appendChild(style);
 }
 
+// --- CẤU HÌNH ---
+    // Đại ca đặt tên cho cái kho chứa số đếm này (phải là duy nhất để không trùng web khác)
+    // Ví dụ em đặt là: daica_minecraft_web_v1
+    const namespace = 'vanhvm.vercel.app';
+    const key = 'download_count';
+
+    const countNumber = document.getElementById('count-number');
+    const links = document.querySelectorAll('.dl-link');
+
+    // 1. HÀM LẤY SỐ LƯỢT TẢI HIỆN TẠI (Khi vừa vào trang)
+    function getCount() {
+        fetch(`https://api.countapi.xyz/get/${namespace}/${key}`)
+        .then(res => res.json())
+        .then(res => {
+            countNumber.innerText = res.value.toLocaleString();
+        })
+        .catch(() => {
+            // Nếu chưa có key này (lần đầu tiên chạy), nó sẽ tạo mới
+            countNumber.innerText = "0";
+            createKey(); 
+        });
+    }
+
+    // Hàm tạo key mới nếu chưa có (chỉ chạy lần đầu tiên trong đời web)
+    function createKey() {
+        fetch(`https://api.countapi.xyz/create?namespace=${namespace}&key=${key}&enable_reset=1`)
+        .then(res => res.json())
+        .then(res => {
+            countNumber.innerText = res.value;
+        });
+    }
+
+    // 2. XỬ LÝ KHI BẤM NÚT (Tăng lượt tải lên Server)
+    links.forEach(link => {
+        link.addEventListener('click', function() {
+            // Gọi API để tăng số lên 1 (hit)
+            fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+            .then(res => res.json())
+            .then(res => {
+                // Cập nhật số mới ngay lập tức
+                countNumber.innerText = res.value.toLocaleString();
+            });
+        });
+    });
+
+    // Chạy hàm lấy số khi vừa tải trang xong
+    getCount();
+
 
 
 
