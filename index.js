@@ -279,68 +279,6 @@ function showPopup() {
   document.head.appendChild(style);
 }
 
-// ========================================================================
-    // 1. CẤU HÌNH ĐẾM SỐ (Lưu trên mây)
-    // ========================================================================
-    const namespace = 'vanhvm.vercel.app'; // Tên định danh web của Đại ca
-    const key = 'download_count_v1';       // Tên biến lưu số
-    
-    const countBox = document.getElementById('counter-box');
-    const countNumber = document.getElementById('count-number');
-    const links = document.querySelectorAll('.dl-link');
-
-    // --- HÀM 1: LẤY SỐ TỪ SERVER VỀ ---
-    function getCount() {
-        fetch(`https://api.countapi.xyz/info/${namespace}/${key}`)
-        .then(res => res.json())
-        .then(res => {
-            // Nếu tìm thấy -> Hiển thị số
-            console.log("Đã tìm thấy kho số:", res.value);
-            countNumber.innerText = res.value.toLocaleString();
-        })
-        .catch(err => {
-            // Nếu KHÔNG tìm thấy (Lỗi) -> Tự động tạo kho mới
-            console.log("Chưa có kho số, đang tạo mới...");
-            createKey();
-        });
-    }
-
-    // --- HÀM 2: TẠO KHO SỐ MỚI (Chạy 1 lần duy nhất trong đời) ---
-    function createKey() {
-        fetch(`https://api.countapi.xyz/create?namespace=${namespace}&key=${key}&enable_reset=1`)
-        .then(res => res.json())
-        .then(res => {
-            console.log("Đã tạo kho mới thành công:", res.value);
-            countNumber.innerText = res.value.toLocaleString(); // Thường là 0
-        })
-        .catch(err => {
-            console.error("Lỗi tạo key:", err);
-            countNumber.innerText = "Error"; 
-        });
-    }
-
-    // --- HÀM 3: XỬ LÝ KHI BẤM NÚT (Tăng số) ---
-    if (links.length > 0) {
-        links.forEach(link => {
-            link.setAttribute('target', '_blank'); // Mở tab mới
-            
-            link.addEventListener('click', function() {
-                // A. Hiện khung số (nếu đang ẩn)
-                if(countBox) countBox.style.display = 'block';
-
-                // B. Tăng số ảo (cho sướng mắt ngay lập tức)
-                let currentVal = parseInt(countNumber.innerText.replace(/,/g, '')) || 0;
-                countNumber.innerText = (currentVal + 1).toLocaleString();
-
-                // C. Gửi lên server lưu lại
-                fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`);
-            });
-        });
-    }
-
-    // ==> CHẠY HÀM LẤY SỐ NGAY KHI VÀO WEB
-    if (countNumber) getCount();
-
 
 
 
