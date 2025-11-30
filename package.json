@@ -1,0 +1,11 @@
+{
+  "name": "quiz-game",
+  "version": "1.0.0",
+  "description": "Game Quiz với nhiều cấp độ",
+  "main": "index.html",
+  "scripts": {
+    "start": "open index.html"
+  },
+  "author": "Đại ca",
+  "license": "MIT"
+}

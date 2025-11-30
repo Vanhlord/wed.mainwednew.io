@@ -1,103 +1,34 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trang chủ</title>
-  <link rel="stylesheet" href="index.css" />
-  <link rel="icon" type="mc/images" href="anhnen.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <video autoplay muted loop id="bg-video">
-    <source src="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/videos/Homepage_Ambient-Hero-A_FGD-25_1800x1080.webm" type="video/webm">
-  </video>
-
-  <header>
-    <img src="logo.png" alt="Server Logo" class="logo" />
-  </header>
-  <main class="content">
-    <div class="server-container">
-      <div class="server-box" id="server-info">
-        <h2>Thông tin Server</h2>
-          <div class="server-status">
-    <span class="status-dot"></span>
-    <span id="server-status-text">Server đang tắt!</span>
-  </div>
-        <p><strong>IP:</strong> <span id="server-ip">---.---.--.---</span></p>
-        <p><strong>Port:</strong> <span id="server-port">-----</span></p>
-        <div class="btn-group">
-          <button id="copyBtn">Copy IP</button>
-          <button id="playBtn">Tham gia ngay</button>
+    <!-- Background mờ -->
+    <div id="background"></div>
+    <div id="start-screen">
+        <div class="start-container">
+            <h2>🎉 Chào mừng đến với Quiz Game! 🎉</h2>
+            <p>Hãy thử thách bản thân qua 3 level và tích điểm thật cao nhé!</p>
+            <button id="start-btn">Bắt đầu</button>
         </div>
-        <p class="note"><em>*Nếu không vào được, hãy kiểm tra lại kết nối mạng, hoặc port server đảm bảo server đang hoạt động nhé.</em></p>
-        <p class="note"><em>*Server đang nghỉ và sẽ được mở lại vào 17/7/2026.</em></p>
-      </div>
-
-      <div class="server-box" id="download">
-        <h2>Phần tải Minecraft PE</h2>
-<div class="download-buttons"> 
-  <p class="note"><em>*Chọn phiên bản phù hợp với thiết bị của bạn</em><br> 
-    <em></em>Link đã được rút gọn!</em></p> 
-  <a href="https://dl.mcpelife.com/minecraft-pe/1-21-124-2/minecraft-1.21.124.2-arm64-v8a.apk">Minecraft 1.21.124</a>
-  <a href="https://mcpedl.org/uploads_files/13-11-2025/minecraft-1-21-123-music.apk">Minecraft 1.21.123</a> 
-  <a href="https://gofile.io/d/U3KEfX">Minecraft 1.21.121 Patched</a> 
-  <a href="https://link.nestvui.com/BANDISHARE/GAME/MCPE/Minecraft_PE_1.21.121_BANDISHARE.apk">Minecraft 1.21.121</a>
-</div>
-      </div>
-<div class="server-box" id="contact">
-  <h2>Cộng đồng</h2>
-  <div class="contact-buttons">
-    <a href="https://m.me/j/AbYkrzp3n_y-dEP0/" target="_blank">
-      <img src="messenger.png" alt="Messenger"> Messenger
-    </a>
-    <a href="https://discord.gg/DFvBJ9RMSG" target="_blank">
-      <img src="discord.png" alt="Discord"> Discord
-    </a>
-    <a href="menu.html">
-      <img src="menu.png" alt="Menu"> Kho đồ linh tinh
-    </a>
     </div>
-  </div>
-</div>
+    <!-- Quiz container -->
+    <div id="quiz-game">
+        <div class="quiz-container">
+            <h2 id="question">Câu hỏi sẽ hiện ở đây</h2>
+            <div id="answers">
+            </div>
+            <div class="score-level-container">
+                <div id="level">1/3</div>
+                <div class="score" id="score">Điểm: 0</div>
+                <div class="score" id="question-counter">1/30</div>
+            </div>
+        </div>
     </div>
-  </main>
-  <footer>
-  <p>Made with Vanh Lord</p>
-  </footer>
-  <body onload="showPopup()">
-  <script src="index.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
