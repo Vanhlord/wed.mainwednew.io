@@ -8,7 +8,7 @@
     { "question": "Số nguyên tố lớn nhất nhỏ hơn 20 là gì?", "answers": ["19","17","13","11"], "correct":0 },
     { "question": "Quốc gia nào có nhiều kim tự tháp nhất?", "answers": ["Sudan","Ai Cập","Mexico","Peru"], "correct":0 },
     { "question": "Ngôn ngữ chính thức của Brazil là gì?", "answers": ["Tiếng Bồ Đào Nha","Tiếng Tây Ban Nha","Tiếng Pháp","Tiếng Anh"], "correct":0 },
-    { "question": "Ai là tác giả của 'To Kill a Mockingbird'?", "answers": ["Harper Lee","J.K. Rowling","Mark Twain","Ernest Hemingway"], "correct":0 }
+    { "question": "Ai là tác giả của 'To Kill a Mockingbird'?", "answers": ["Harper Lee","J.K. Rowling","Mark Twain","Ernest Hemingway"], "correct":0 },
     { "question": "Hành tinh nào trong Hệ Mặt trời được biết đến với Vành đai nổi bật?", "answers": ["Sao Thổ", "Sao Mộc", "Sao Thiên Vương", "Sao Hải Vương"], "correct": 0 },
     { "question": "Ai là người đã viết vở kịch 'Romeo và Juliet'?", "answers": ["William Shakespeare", "Charles Dickens", "Jane Austen", "Geoffrey Chaucer"], "correct": 0 },
     { "question": "Thủ đô của Canada là gì?", "answers": ["Ottawa", "Toronto", "Vancouver", "Montreal"], "correct": 0 },
@@ -49,7 +49,7 @@
     { "question": "Thành phố nào được gọi là 'Thành phố Vàng'?", "answers": ["Praha", "Bangkok", "Johannesburg", "Istanbul"], "correct": 0 },
     { "question": "Động vật nào nổi tiếng với việc ngủ đông?", "answers": ["Gấu", "Hươu cao cổ", "Sư tử", "Cáo"], "correct": 0 },
     { "question": "Nhà triết học Hy Lạp cổ đại nào là thầy của Alexander Đại đế?", "answers": ["Aristotle", "Socrates", "Plato", "Pythagoras"], "correct": 0 },
-    { "question": "Trong đại số, '$\pi$' (Pi) xấp xỉ bằng bao nhiêu?", "answers": ["3.14159", "2.71828", "1.61803", "1.41421"], "correct": 0 },
+    { "question": "Trong đại số, '$ trên pi$' (Pi) xấp xỉ bằng bao nhiêu?", "answers": ["3.14159", "2.71828", "1.61803", "1.41421"], "correct": 0 },
     { "question": "Quá trình nào chuyển đổi nước từ chất lỏng sang chất khí?", "answers": ["Bay hơi", "Ngưng tụ", "Đông đặc", "Thăng hoa"], "correct": 0 },
     { "question": "Nước nào có đường bờ biển dài nhất thế giới?", "answers": ["Canada", "Nga", "Úc", "Mỹ"], "correct": 0 },
     { "question": "Đâu là tên gọi của một loại hình thơ Nhật Bản gồm ba dòng với số lượng âm tiết 5-7-5?", "answers": ["Haiku", "Tanka", "Sonnet", "Limerick"], "correct": 0 },
@@ -77,7 +77,7 @@
     { "question": "Quốc gia nào nổi tiếng với vũ điệu Tango?", "answers": ["Argentina", "Brazil", "Tây Ban Nha", "Mexico"], "correct": 0 },
     { "question": "Giải thưởng Nobel được trao hàng năm tại quốc gia nào (ngoại trừ giải Hòa bình)?", "answers": ["Thụy Điển", "Na Uy", "Đan Mạch", "Phần Lan"], "correct": 0 },
     { "question": "Ai là nhà khoa học Hy Lạp đã hét lên 'Eureka!' khi tìm ra cách đo mật độ?", "answers": ["Archimedes", "Pythagoras", "Plato", "Socrates"], "correct": 0 },
-    { "question": "Trong hình học, tổng các góc trong một tam giác là bao nhiêu độ?", "answers": ["$180^\circ$", "$90^\circ$", "$360^\circ$", "$270^\circ$"], "correct": 0 },
+    { "question": "Trong hình học, tổng các góc trong một tam giác là bao nhiêu độ?", "answers": ["$180^ trên circ$", "$90^ trên circ$", "$360^ trên circ$", "$270^ trên circ$"], "correct": 0 },
     { "question": "Sông nào là dài nhất trên thế giới?", "answers": ["Sông Nile", "Sông Amazon", "Sông Dương Tử", "Sông Mississippi"], "correct": 0 },
     { "question": "Ai là vị Tổng thống Mỹ thứ 16, người đã tuyên bố giải phóng nô lệ?", "answers": ["Abraham Lincoln", "Andrew Jackson", "Theodore Roosevelt", "Woodrow Wilson"], "correct": 0 },
     { "question": "Năm nào bức tường Berlin sụp đổ?", "answers": ["1989", "1991", "1985", "1979"], "correct": 0 },
@@ -209,7 +209,7 @@
     { "question": "Ai là nhà điêu khắc của 'Tượng Chúa Cứu Thế' ở Rio de Janeiro?", "answers": ["Paul Landowski", "Michelangelo", "Auguste Rodin", "Donatello"], "correct": 0 },
     { "question": "Loại nhiên liệu hóa thạch nào có trữ lượng lớn nhất trên thế giới?", "answers": ["Than đá", "Dầu mỏ", "Khí tự nhiên", "Uranium"], "correct": 0 },
     { "question": "Đâu là tên gọi của một ngôi sao khổng lồ đỏ đã chết?", "answers": ["Sao lùn trắng", "Sao neutron", "Hố đen", "Quasar"], "correct": 0 },
-    { "question": "Trong hình học, một góc vuông có số đo là bao nhiêu?", "answers": ["$90^\circ$", "$180^\circ$", "$45^\circ$", "$360^\circ$"], "correct": 0 },
+    { "question": "Trong hình học, một góc vuông có số đo là bao nhiêu?", "answers": ["$90^ trên circ$", "$180^ trên circ$", "$45^ trên circ$", "$360^ trên circ$"], "correct": 0 },
     { "question": "Nhà văn nào nổi tiếng với tác phẩm '1984'?", "answers": ["George Orwell", "Aldous Huxley", "J.R.R. Tolkien", "Ray Bradbury"], "correct": 0 },
     { "question": "Nguyên tố nào là thành phần chính của thép?", "answers": ["Sắt", "Carbon", "Nikẽm", "Crom"], "correct": 0 },
     { "question": "Đơn vị tiền tệ của Nga là gì?", "answers": ["Rúp", "Euro", "Đô la", "Yên"], "correct": 0 },
@@ -247,7 +247,7 @@
     { "question": "Sự kiện nào xảy ra vào năm 1776?", "answers": ["Tuyên ngôn Độc lập của Mỹ", "Cách mạng Pháp", "Chiến tranh Bảy năm", "Chiến tranh 1812"], "correct": 0 },
     { "question": "Thành phố nào được mệnh danh là 'Thành phố không ngủ'?", "answers": ["New York", "London", "Tokyo", "Paris"], "correct": 0 },
     { "question": "Hồ nào được mệnh danh là 'Trái tim của Siberia'?", "answers": ["Hồ Baikal", "Biển Caspi", "Hồ Superior", "Hồ Aral"], "correct": 0 },
-    { "question": "Trong vật lý, '$\lambda$' (lambda) thường được sử dụng để ký hiệu cho đại lượng nào?", "answers": ["Bước sóng", "Tần số", "Vận tốc", "Năng lượng"], "correct": 0 },
+    { "question": "Trong vật lý, '$ trên lambda$' (lambda) thường được sử dụng để ký hiệu cho đại lượng nào?", "answers": ["Bước sóng", "Tần số", "Vận tốc", "Năng lượng"], "correct": 0 },
     { "question": "Loài thực vật nào không cần ánh sáng mặt trời để phát triển?", "answers": ["Nấm", "Rong biển", "Cây dương xỉ", "Cây xương rồng"], "correct": 0 },
     { "question": "Ai là người đã viết opera 'Đám cưới Figaro'?", "answers": ["Wolfgang Amadeus Mozart", "Ludwig van Beethoven", "Johann Sebastian Bach", "Franz Schubert"], "correct": 0 },
     { "question": "Môn thể thao nào nổi tiếng với giải 'Super Bowl'?", "answers": ["Bóng bầu dục Mỹ", "Bóng đá", "Bóng chày", "Bóng rổ"], "correct": 0 },
@@ -266,7 +266,7 @@
     { "question": "Tên gọi của một thiên thể nhỏ quay quanh một hành tinh là gì?", "answers": ["Vệ tinh (Mặt trăng)", "Tiểu hành tinh", "Sao chổi", "Thiên thạch"], "correct": 0 },
     { "question": "Nguyên tố nào có ký hiệu 'Ne'?", "answers": ["Neon", "Nitrogen", "Nickel", "Natri"], "correct": 0 },
     { "question": "Thành phố nào nổi tiếng với sự kiện 'Oktoberfest'?", "answers": ["Munich", "Berlin", "Frankfurt", "Hamburg"], "correct": 0 },
-    { "question": "Trong toán học, khái niệm 'vô hạn' được ký hiệu bằng biểu tượng nào?", "answers": ["$\infty$", "$e$", "$\pi$", "$i$"], "correct": 0 },
+    { "question": "Trong toán học, khái niệm 'vô hạn' được ký hiệu bằng biểu tượng nào?", "answers": ["$ trên infty$", "$e$", "$ trên pi$", "$i$"], "correct": 0 },
     { "question": "Đơn vị đo độ lớn của động đất là gì?", "answers": ["Thang Richter", "Thang Celsius", "Thang Kelvin", "Thang Fahrenheit"], "correct": 0 },
     { "question": "Ai là nhà khoa học đã đặt tên cho các loài theo hệ thống danh pháp hai phần (chi và loài)?", "answers": ["Carl Linnaeus", "Charles Darwin", "Gregor Mendel", "Louis Pasteur"], "correct": 0 },
     { "question": "Môn thể thao nào sử dụng bóng và vợt, được chơi trên sân hình chữ nhật có lưới?", "answers": ["Quần vợt", "Bóng bàn", "Cầu lông", "Bóng chuyền"], "correct": 0 },
@@ -364,3 +364,4 @@
     { "question": "Ai là người sáng lập ra Kitô giáo?", "answers": ["Jesus Christ", "Muhammad", "Abraham", "Moses"], "correct": 0 },
     { "question": "Thành phố nào nổi tiếng với Nhà hát Opera Sydney?", "answers": ["Sydney", "Melbourne", "Brisbane", "Perth"], "correct": 0 }
 ]
+
