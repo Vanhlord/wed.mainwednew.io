@@ -86,6 +86,14 @@ function showQuestion() {
             btn.onclick = () => checkAnswer(i);
             answersEl.appendChild(btn);
         });
+
+        // Hiệu ứng fade in
+        setTimeout(() => {
+            questionEl.classList.remove('fade-out');
+            questionEl.classList.add('fade-in');
+            answersEl.classList.remove('fade-out');
+            answersEl.classList.add('fade-in');
+        }, 50);
     } else {
     questionEl.textContent = "🎉 Quiz kết thúc!";
     answersEl.style.display = "none";
@@ -106,26 +114,38 @@ function showQuestion() {
 }
 // Kiểm tra đáp án
 function checkAnswer(index) {
+    const buttons = answersEl.querySelectorAll('button');
+    const clickedBtn = buttons[index];
+
+    // Thêm class đúng/sai và vô hiệu hóa tất cả nút
     if (index === quiz[currentQuestion].correct) {
+        clickedBtn.classList.add('correct');
         const points = quiz[currentQuestion].level === 1 ? 10 : quiz[currentQuestion].level === 2 ? 20 : 30;
         score += points;
+    } else {
+        clickedBtn.classList.add('wrong');
     }
+    buttons.forEach(btn => btn.classList.add('disabled'));
+
     scoreEl.textContent = `Điểm: ${score}`;
 
-    const nextQuestion = currentQuestion + 1;
-    const currentLevel = Math.floor(currentQuestion / 10) + 1;
-    const nextLevel = Math.floor(nextQuestion / 10) + 1;
+    // Delay 1 giây rồi chuyển câu
+    setTimeout(() => {
+        const nextQuestion = currentQuestion + 1;
+        const currentLevel = Math.floor(currentQuestion / 10) + 1;
+        const nextLevel = Math.floor(nextQuestion / 10) + 1;
 
-    // Nếu sắp chuyển level, show popup
-    if (nextLevel > currentLevel) {
-        showLevelUp(nextLevel, () => {
+        // Nếu sắp chuyển level, show popup
+        if (nextLevel > currentLevel) {
+            showLevelUp(nextLevel, () => {
+                currentQuestion++;
+                showQuestion();
+            });
+        } else {
             currentQuestion++;
             showQuestion();
-        });
-    } else {
-        currentQuestion++;
-        showQuestion();
-    }
+        }
+    }, 1000);
 }
 function showLevelUp(level, callback) {
     const popup = document.createElement("div");
