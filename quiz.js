@@ -26,6 +26,8 @@ function startQuiz() {
     score = 0;
     scoreEl.textContent = `Điểm: ${score}`;
     quizGameEl.style.display = "block";
+    // Reset fade classes
+    quizGameEl.classList.remove('fade-out', 'fade-in');
 
     // Load lv1, lv2, lv3
     Promise.all([
@@ -34,13 +36,20 @@ function startQuiz() {
         fetch('questions-lv3.json').then(res => res.json())
     ])
     .then(([lv1Data, lv2Data, lv3Data]) => {
-        // Lấy 10 câu từ mỗi level
+
+        // Trộn trong từng level thôi
         const lv1Questions = shuffleArray(lv1Data).slice(0, 10).map(q => ({ ...q, level: 1 }));
         const lv2Questions = shuffleArray(lv2Data).slice(0, 10).map(q => ({ ...q, level: 2 }));
         const lv3Questions = shuffleArray(lv3Data).slice(0, 10).map(q => ({ ...q, level: 3 }));
-        const combined = lv1Questions.concat(lv2Questions, lv3Questions);
-        // Xáo trộn toàn bộ
-        quiz = shuffleArray(combined).map(q => shuffleAnswers(q));
+
+        // KHÔNG xáo trộn tổng thể nữa
+        const combined = [
+            ...lv1Questions.map(q => shuffleAnswers(q)),
+            ...lv2Questions.map(q => shuffleAnswers(q)),
+            ...lv3Questions.map(q => shuffleAnswers(q))
+        ];
+
+        quiz = combined;
         showQuestion();
     })
     .catch(err => {
@@ -74,7 +83,8 @@ function showQuestion() {
 
         // Cập nhật level
         const currentLevel = Math.floor(currentQuestion / 10) + 1;
-        levelEl.textContent = `${currentLevel}/3`;
+        const levelNames = ["Dễ", "Trung bình", "Khó"];
+        levelEl.textContent = levelNames[currentLevel - 1];
 
         // Cập nhật question counter
         questionCounterEl.textContent = `${currentQuestion + 1}/${quiz.length}`;
@@ -98,7 +108,7 @@ function showQuestion() {
     questionEl.textContent = "🎉 Quiz kết thúc!";
     answersEl.style.display = "none";
     scoreEl.textContent = `Tổng điểm: ${score}`;
-    levelEl.textContent = "3/3";
+    levelEl.textContent = "Khó";
     questionCounterEl.textContent = `${quiz.length}/${quiz.length}`;
 
     // tạo nút chơi lại mới mỗi lần
@@ -135,8 +145,8 @@ function checkAnswer(index) {
         const currentLevel = Math.floor(currentQuestion / 10) + 1;
         const nextLevel = Math.floor(nextQuestion / 10) + 1;
 
-        // Nếu sắp chuyển level, show popup
-        if (nextLevel > currentLevel) {
+        // Nếu sắp chuyển level và chưa hết game, show popup
+        if (nextLevel > currentLevel && nextQuestion < quiz.length) {
             showLevelUp(nextLevel, () => {
                 currentQuestion++;
                 showQuestion();
@@ -148,35 +158,62 @@ function checkAnswer(index) {
     }, 1000);
 }
 function showLevelUp(level, callback) {
-    const popup = document.createElement("div");
-    popup.textContent = `✨ Level ${level}! ✨`;
-    popup.style.position = "absolute";
-    popup.style.top = "50%";
-    popup.style.left = "50%";
-    popup.style.transform = "translate(-50%, -50%)";
-    popup.style.padding = "20px 40px";
-    popup.style.background = "rgba(255, 255, 255, 0.15)";
-    popup.style.color = "#fff";
-    popup.style.fontSize = "1.5em";
-    popup.style.borderRadius = "15px";
-    popup.style.textAlign = "center";
-    popup.style.backdropFilter = "blur(8px)";
-    popup.style.boxShadow = "0 8px 32px rgba(0,0,0,0.37)";
-    popup.style.zIndex = "100";
-    popup.style.opacity = "0";
-    popup.style.transition = "all 0.5s ease";
+    // Fade out quiz container
+    quizGameEl.classList.add('fade-out');
 
-    document.body.appendChild(popup);
+    // Tạo overlay mờ
+    const overlay = document.createElement("div");
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.background = "rgba(0, 0, 0, 0.7)";
+    overlay.style.backdropFilter = "blur(8px)";
+    overlay.style.zIndex = "999";
+    overlay.style.opacity = "0";
+    overlay.style.transition = "opacity 0.5s ease";
+    document.body.appendChild(overlay);
 
-    // Hiệu ứng fade in
-    setTimeout(() => { popup.style.opacity = "1"; }, 50);
-
-    // 2 giây sau fade out và callback
     setTimeout(() => {
+        overlay.style.opacity = "1";
+
+        const popup = document.createElement("div");
+        popup.textContent = `🚀 Độ khó tăng lên Level ${level}! 🚀`;
+        popup.style.position = "fixed";
+        popup.style.top = "50%";
+        popup.style.left = "50%";
+        popup.style.transform = "translate(-50%, -50%)";
+        popup.style.padding = "30px 50px";
+        popup.style.background = "rgba(255, 255, 255, 0.2)";
+        popup.style.color = "#fff";
+        popup.style.fontSize = "1.8em";
+        popup.style.borderRadius = "20px";
+        popup.style.textAlign = "center";
+        popup.style.backdropFilter = "blur(10px)";
+        popup.style.boxShadow = "0 10px 40px rgba(0,0,0,0.5)";
+        popup.style.zIndex = "1000";
         popup.style.opacity = "0";
+        popup.style.transition = "all 0.5s ease";
+
+        document.body.appendChild(popup);
+
+        // Hiệu ứng fade in
+        setTimeout(() => { popup.style.opacity = "1"; }, 100);
+
+        // 2.5 giây sau fade out và callback
         setTimeout(() => {
-            popup.remove();
-            callback();
-        }, 500);
-    }, 2000);
+            popup.style.opacity = "0";
+            overlay.style.opacity = "0";
+            setTimeout(() => {
+                popup.remove();
+                overlay.remove();
+                // Fade back in quiz container
+                quizGameEl.classList.remove('fade-out');
+                quizGameEl.classList.add('fade-in');
+                callback();
+            }, 500);
+        }, 2500);
+    }, 500); // Delay to allow fade out
 }
+
