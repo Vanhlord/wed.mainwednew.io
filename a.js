@@ -9,9 +9,9 @@ const DEFAULT_LOGO = "default.png";
 // Danh sách nút (chỉ cần chỉnh ở đây)
 const links = [
     {
-        name: "Google",
-        link: "https://google.com",
-        logo: "https://www.google.com/favicon.ico",
+        name: "Mediafire",
+        link: "https://www.mediafire.com/",
+        logo: "https://www.mediafire.com/favicon.ico",
         tags: ["best"]
     },
     {
