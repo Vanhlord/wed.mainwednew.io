@@ -259,6 +259,9 @@ function showPopup() {
   `;
   document.head.appendChild(style);
 }
+//phần gọi thông báo khi bắt đầu vào web
+document.addEventListener("DOMContentLoaded", showPopup);
+
 
 
 
