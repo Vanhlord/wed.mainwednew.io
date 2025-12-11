@@ -283,9 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // ==========================================================
     // 1. KHAI BÁO CÁC PHẦN TỬ (Elements)
-    // ==========================================================
-    const copyBtn = document.getElementById("copyBtn");
-    const playBtn = document.getElementById("playBtn");
+    // =========================================================
     const shareQrBtn = document.getElementById("shareQrBtn"); // Nút Chia sẻ QR Code
     
     // Các phần tử của Modal (PHẢI CÓ TRONG HTML)
@@ -295,12 +293,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Lấy thông tin Server
     const ipElement = document.getElementById("server-ip");
     const portElement = document.getElementById("server-port");
-
-
     // ==========================================================
     // 2. CHỨC NĂNG XỬ LÝ (Functions)
     // ==========================================================
-
     // Hàm Hiển thị Modal với Animation
     function showModal() {
         if (!qrModal) return console.error("Lỗi: Không tìm thấy phần tử #qrModal.");
@@ -342,11 +337,9 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error('Lỗi Copy:', err);
         });
     }
-
     // ==========================================================
     // 3. THIẾT LẬP SỰ KIỆN (Event Listeners)
     // ==========================================================
-    
     // Xử lý nút COPY IP
     if (copyBtn) {
         copyBtn.addEventListener("click", copyIP);
@@ -370,16 +363,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     // Xử lý nút THAM GIA NGAY (Chức năng mở game, cần logic riêng)
-    // if (playBtn) {
-    //     playBtn.addEventListener("click", () => {
-    //         // Logic mở game (như em đã giải thích là cần URI Scheme)
-    //         const ip = ipElement.textContent.trim();
-    //         const port = portElement.textContent.trim();
-    //         // Ví dụ: window.location.href = `minecraft://server?ip=${ip}&port=${port}`;
-    //     });
-    // }
+     if (playBtn) {
+         playBtn.addEventListener("click", () => {
+             // Logic mở game (như em đã giải thích là cần URI Scheme)
+             const ip = ipElement.textContent.trim();
+             const port = portElement.textContent.trim();
+             window.location.href = `minecraft://server?ip=${ip}&port=${port}`;
+         });
+     }
 
 });
+
 
 
 
