@@ -1,126 +1,107 @@
-
-// Mở Minecraft========================================================================
+//nút chơi ngay
+        
 document.getElementById("playBtn").addEventListener("click", () => {
-  const ip = document.getElementById("server-ip").textContent;
-  const port = document.getElementById("server-port").textContent;
-  //jssjshgsjdvsdgsjdvsjusgsvdjxbkshsjxjdhdjhdjdjsjxhdjxjddjdjjdjdjdjdjdhdhdhdhdhdhxhbxbbxbxbbx
-  // Tạo popup nếu chưa có
+  const ip = document.getElementById("server-ip").textContent.trim();
+  const port = document.getElementById("server-port").textContent.trim();
+  let countdownTimer; // Khai báo biến global cho setInterval
+
+  // 1. TẠO POPUP (Chỉ tạo 1 lần)
   let popup = document.getElementById("countdownPopup");
   if (!popup) {
-    popup = document.createElement("div");
-    popup.id = "countdownPopup";
-    popup.innerHTML = `
-      <div class="popup-box">
-        <h2>⏳ Đang chuẩn bị...</h2>
-        <p id="countText">Vào game sau <span id="countdown">5</span>s</p>
-        <p class="note">💬 Đợi 5 giây, tôi sẽ nhập IP, port cho bạn!</p>
-        <button id="cancelBtn">❌ Hủy</button>
-      </div>
-    `;
-    document.body.appendChild(popup);
-
-    // Style trực tiếp bằng JS
-    const style = document.createElement("style");
-    style.textContent = `
-      #countdownPopup {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(8px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.4s ease;
-        z-index: 999;
-      }
-      #countdownPopup.active {
-        opacity: 1;
-        pointer-events: auto;
-      }
-      .popup-box {
-        background: rgba(255, 255, 255, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 15px;
-        padding: 30px 50px;
-        color: #fff;
-        text-align: center;
-        font-family: 'Poppins', sans-serif;
-        box-shadow: 0 0 25px rgba(0,0,0,0.5);
-        transform: translateY(40px);
-        opacity: 0;
-        transition: all 0.4s ease;
-      }
-      #countdownPopup.active .popup-box {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      .popup-box h2 {
-        font-size: 24px;
-        margin-bottom: 10px;
-      }
-      .popup-box .note {
-        font-size: 14px;
-        opacity: 0.8;
-        margin-top: 10px;
-      }
-      #cancelBtn {
-        margin-top: 15px;
-        background: rgba(255, 80, 80, 0.8);
-        color: #fff;
-        border: none;
-        border-radius: 10px;
-        padding: 10px 20px;
-        cursor: pointer;
-        font-weight: 600;
-        transition: all 0.2s ease;
-      }
-      #cancelBtn:hover {
-        background: rgba(255, 50, 50, 1);
-        transform: scale(1.05);
-      }
-      #cancelBtn:active {
-        transform: scale(0.95);
-      }
-    `;
-    document.head.appendChild(style);
+    popup = createPopupElement();
   }
 
-  // Hiện popup và đếm ngược
+  // 2. HIỆN POPUP VÀ BẮT ĐẦU ĐẾM NGƯỢC
   popup.classList.add("active");
   const countdownEl = popup.querySelector("#countdown");
   const cancelBtn = popup.querySelector("#cancelBtn");
+
   let time = 5;
-  let cancelled = false;
   countdownEl.textContent = time;
 
-  const interval = setInterval(() => {
-    if (cancelled) {
-      clearInterval(interval);
-      popup.classList.remove("active");
-      return;
-    }
+  // Xóa lắng nghe cũ (quan trọng để tránh gọi hàm nhiều lần)
+  cancelBtn.onclick = null; 
+
+  // Lắng nghe sự kiện Hủy
+  cancelBtn.addEventListener("click", handleCancel);
+
+  // Bắt đầu Timer
+  countdownTimer = setInterval(handleCountdown, 1000);
+
+  // 3. LOGIC HÀM
+  function handleCountdown() {
     time--;
     countdownEl.textContent = time;
-    if (time <= 0) {
-      clearInterval(interval);
-      popup.classList.remove("active");
-      if (!cancelled) {
-        setTimeout(() => {
-          window.location.href = `minecraft://?addExternalServer=VanhLoreVanhLore|${ip}:${port}`;
-        }, 400);
-      }
-    }
-  }, 1000);
 
-  // Nút Hủy
-  cancelBtn.addEventListener("click", () => {
-    cancelled = true;
+    if (time <= 0) {
+      clearInterval(countdownTimer);
+      // Đóng popup sau khi đếm xong (có delay để hiệu ứng đóng mượt hơn)
+      popup.classList.remove("active"); 
+      
+      // Chuyển hướng sau khi đóng popup
+      setTimeout(() => {
+        // Tạo URL Minecraft Bedrock
+        const url = `minecraft://?addExternalServer=VanhLoreVanhLore|${ip}:${port}`;
+        window.location.href = url;
+      }, 400); // Đợi 0.4s cho hiệu ứng đóng popup
+    }
+  }
+
+  function handleCancel() {
+    clearInterval(countdownTimer);
     popup.classList.remove("active");
-  });
+    // Loại bỏ sự kiện Hủy để tránh trigger lỗi nếu click liên tục
+    cancelBtn.removeEventListener("click", handleCancel); 
+  }
+
 });
+
+// Hàm tạo element và style (tách riêng cho gọn)
+function createPopupElement() {
+  const popup = document.createElement("div");
+  popup.id = "countdownPopup";
+  popup.innerHTML = `
+    <div class="popup-box">
+      <h2>⏳ Đang chuẩn bị...</h2>
+      <p id="countText">Vào game sau <span id="countdown">5</span>s</p>
+      <p class="note">💬 Đợi 5 giây, tôi sẽ nhập IP, port cho bạn!</p>
+      <button id="cancelBtn">❌ Hủy</button>
+    </div>
+  `;
+  document.body.appendChild(popup);
+
+  const style = document.createElement("style");
+  style.textContent = `
+    #countdownPopup {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.4s ease; z-index: 999;
+    }
+    #countdownPopup.active { opacity: 1; pointer-events: auto; }
+    .popup-box {
+      background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 15px; padding: 30px 50px; color: #fff; text-align: center;
+      font-family: 'Poppins', sans-serif; box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      transform: translateY(40px); opacity: 0; transition: all 0.4s ease;
+    }
+    #countdownPopup.active .popup-box { transform: translateY(0); opacity: 1; }
+    .popup-box h2 { font-size: 24px; margin-bottom: 10px; }
+    .popup-box .note { font-size: 14px; opacity: 0.8; margin-top: 10px; }
+    #cancelBtn {
+      margin-top: 15px; background: rgba(255, 80, 80, 0.8); color: #fff;
+      border: none; border-radius: 10px; padding: 10px 20px; cursor: pointer;
+      font-weight: 600; transition: all 0.2s ease;
+    }
+    #cancelBtn:hover { background: rgba(255, 50, 50, 1); transform: scale(1.05); }
+    #cancelBtn:active { transform: scale(0.95); }
+  `;
+  document.head.appendChild(style);
+  return popup;
+}
+
 
 // Nút bấm sao chép IP=================================================================
 document.getElementById("copyBtn").addEventListener("click", function() {
@@ -278,6 +259,7 @@ function showPopup() {
   `;
   document.head.appendChild(style);
 }
+
 
 
 
