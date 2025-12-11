@@ -4,6 +4,52 @@ document.getElementById("playBtn").addEventListener("click", () => {
   const ip = document.getElementById("server-ip").textContent;
   const port = document.getElementById("server-port").textContent;
 
+  document.addEventListener("DOMContentLoaded", () => {
+    // 1. Lấy các phần tử cần thiết
+    const shareQrBtn = document.getElementById("shareQrBtn");
+    const qrModal = document.getElementById("qrModal");
+    const closeButton = document.querySelector(".modal-content .close-button"); 
+
+    // Hàm hiển thị Modal
+    function showModal() {
+        // Dùng display block/flex để nó xuất hiện
+        qrModal.style.display = "flex"; 
+        // Sau một thời gian ngắn (để trình duyệt kịp nhận display:flex), ta thêm class kích hoạt animation
+        setTimeout(() => {
+             qrModal.classList.add('show-modal');
+        }, 10); // Thời gian chờ rất ngắn
+    }
+
+    // Hàm ẩn Modal
+    function hideModal() {
+        // Bắt đầu hiệu ứng ẩn
+        qrModal.classList.remove('show-modal');
+        // Chờ hiệu ứng transition kết thúc (0.3s) rồi mới ẩn hẳn (display: none)
+        setTimeout(() => {
+             qrModal.style.display = "none";
+        }, 300); // 300ms = 0.3s (bằng thời gian transition)
+    }
+
+
+    // 2. Xử lý sự kiện khi nhấn nút "Chia sẻ qua QR code"
+    if (shareQrBtn) {
+        shareQrBtn.addEventListener("click", showModal);
+    }
+
+    // 3. Xử lý sự kiện khi nhấn nút đóng (X)
+    if (closeButton) {
+        closeButton.addEventListener("click", hideModal);
+    }
+
+    // 4. Xử lý sự kiện khi click ra ngoài Modal
+    window.addEventListener("click", (event) => {
+        if (event.target == qrModal) {
+            hideModal();
+        }
+    });
+});
+  //jssjshgsjdvsdgsjdvsjusgsvdjxbkshsjxjdhdjhdjdjsjxhdjxjddjdjjdjdjdjdjdhdhdhdhdhdhxhbxbbxbxbbx
+
   // Tạo popup nếu chưa có
   let popup = document.getElementById("countdownPopup");
   if (!popup) {
@@ -278,6 +324,7 @@ function showPopup() {
   `;
   document.head.appendChild(style);
 }
+
 
 
 
