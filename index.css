@@ -1,7 +1,6 @@
 /* 🎨 Cấu hình cơ bản ===============================================================================================*/
 body {
   font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #ffffff, #ffffff);
   text-align: center;
   padding: 0;
   margin: 0;
@@ -19,17 +18,30 @@ body {
   filter: brightness(0.5);
 }
 
-/* 🌈 Logo di chuyển qua lại =======================================================================================*/
+/* 🌈 Logo & Tên Server =======================================================================================*/
 header {
   position: absolute;
   top: 30px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
+  display: flex; /* Bật flex để căn h1 và logo */
+  flex-direction: column;
+  align-items: center; 
 }
 
+/* Tiêu đề H1 */
+.logo-text { 
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 5px #000;
+    margin-bottom: 5px;
+}
+
+/* Ảnh Logo */
 .logo {
-  width: 450px;
+  width: 350px; /* Tối ưu hóa kích thước */
   animation: floatLogo 4s ease-in-out infinite alternate;
   filter: drop-shadow(0 0 10px rgba(255,255,255,0.6));
 }
@@ -46,15 +58,17 @@ main {
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 40px;
-  margin-top: 250px; /* để logo có không gian */
+  margin-top: 250px; 
   padding: 20px;
 }
 
 .server-container {
   display: flex;
-  justify-content: center; /* Căn giữa cả hai box */
-  gap: 40px; /* 👈 khoảng cách giữa hai box, chỉnh to nhỏ tùy thích */
-  flex-wrap: wrap; /* để xuống hàng nếu màn hình nhỏ */
+  justify-content: center; 
+  gap: 40px; 
+  flex-wrap: wrap; 
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 /* 🧊 Hiệu ứng kính cho box ========================================================================================*/
@@ -64,7 +78,7 @@ main {
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 15px;
   padding: 30px;
-  width: 340px;
+  width: 300px; /* Đã tối ưu */
   text-align: left;
   box-shadow: 0 6px 18px rgba(0,0,0,0.5);
   transition: all 0.3s ease;
@@ -86,12 +100,18 @@ main {
   box-shadow: 0 10px 25px rgba(255,255,255,0.3);
 }
 
-/* 🎮 Nhóm nút chính ==============================================================================================*/
+/* 🎮 Nhóm nút chính (FIX LỖI CÂN ĐỐI WIDTH) ======================================================================*/
 .btn-group {
   display: flex;
-  justify-content: center;
+  flex-direction: column; /* Xếp dọc */
   gap: 15px;
   margin-top: 20px;
+}
+
+.btn-group button {
+    width: 100%; /* Cân bằng chiều rộng */
+    padding: 12px 25px; 
+    font-weight: 600;
 }
 
 /* 📋 Nút sao chép IP với hiệu ứng ===========================================*/
@@ -100,7 +120,6 @@ main {
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 10px;
   color: #fff;
-  padding: 10px 25px;
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -138,11 +157,10 @@ main {
 #playBtn {
   background: linear-gradient(135deg, #2ecc71, #27ae60);
   color: #fff;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   border: none;
   border-radius: 12px;
-  padding: 12px 30px;
   cursor: pointer;
   transition: all 0.25s ease;
   box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
@@ -169,16 +187,16 @@ main {
 }
 
 .download-buttons a {
+  width: 90%; /* Đã tối ưu */
   text-decoration: none;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 12px;
-  padding: 12px 30px;
+  padding: 12px 10px; 
   color: #dffcff;
   font-weight: 600;
   font-size: 16px;
-  width: 260px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.4);
   transition: all 0.3s ease;
 }
@@ -218,14 +236,14 @@ footer p {
 /* 🎧 Phần liên hệ admin ============================================================================================*/
 .contact-buttons {
   display: flex;
-  flex-direction: column; /* 👈 Cho nút xếp dọc */
-  align-items: center; /* Căn giữa theo trục ngang */
-  gap: 12px; /* Khoảng cách giữa 2 nút */
+  flex-direction: column; 
+  align-items: center; 
+  gap: 12px; 
   margin-top: 15px;
 }
 
 .contact-buttons a {
-  width: 200px; /* 👈 Giữ kích thước cố định cho đều */
+  width: 90%; /* Đã tối ưu */
   text-align: center;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -255,7 +273,7 @@ footer p {
   transform: scale(1.2) rotate(5deg);
 }
 
-/* Nút Menu */
+/* Nút Menu (Hiện không có trong HTML, nhưng giữ lại) */
 #menuBtn {
   width: 200px;
   text-align: center;
@@ -275,7 +293,7 @@ footer p {
   transform: scale(1.07);
 }
 
-/* Menu dropdown trong phần liên hệ */
+/* Menu dropdown (Hiện không có trong HTML, nhưng giữ lại) */
 #contactMenu {
   position: absolute;
   top: 100%;
@@ -358,32 +376,35 @@ footer p {
   header {
     top: 15px;
   }
+  
+  .logo-text {
+      font-size: 24px;
+  }
 
   .logo {
-    width: 250px; /* nhỏ lại cho vừa màn hình */
-    animation: floatLogo 4s ease-in-out infinite alternate;
+    width: 200px;
   }
 
   main {
-    margin-top: 180px; /* rút gọn khoảng cách logo */
+    margin-top: 150px;
     gap: 20px;
     padding: 10px;
   }
 
   .server-box {
-    width: 90%; /* chiếm gần hết màn hình */
+    width: 90%; 
+    max-width: 350px;
     padding: 20px;
   }
 
-  .btn-group, .download-buttons, .contact-buttons {
-    flex-direction: column;
+  .btn-group {
     gap: 10px;
   }
-
-  #copyBtn, #playBtn, .download-buttons a, #menuBtn {
-    width: 80%; /* vừa màn hình */
-    padding: 10px 15px;
-    font-size: 14px;
+  
+  .download-buttons a, .contact-buttons a {
+      width: 90%;
+      padding: 10px 15px;
+      font-size: 15px;
   }
 
   #contactMenu {
@@ -397,12 +418,3 @@ footer p {
     padding: 10px 0;
   }
 }
-
-/* 🌐 header ============================================================================================*/
-
-
-
-
-
-
-
