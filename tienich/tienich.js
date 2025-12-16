@@ -5,7 +5,7 @@ const TAGS = {
     pending: "Đang đánh giá"
 };
 // Logo mặc định trong dự án
-const DEFAULT_LOGO = "default.png";
+const DEFAULT_LOGO = "images/app/default.png";
 // Danh sách nút (chỉ cần chỉnh ở đây)
 const links = [
     {
