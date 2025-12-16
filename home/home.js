@@ -222,6 +222,7 @@ function showPopup() {
     <h2 style="margin:0 0 10px;font-size:1.3em;">Người trẻ tuổi thân mến!</h2>
     <p style="margin:0 0 15px;font-size:0.95em;">Đã cập nhập phiên bản Minecraft mới!<br>
     - Minecraft 1.21.130<br>
+    - Minecraft 26.0 beta<br>
     Các tính năng mới sẽ được thêm...!</p>
     <button style="
       padding:8px 16px;
