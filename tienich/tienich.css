@@ -1,1 +1,169 @@
+body {
+    background: #0f0f0f;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    padding: 30px;
+    text-align: center;
+}
 
+.title {
+    margin-bottom: 30px;
+}
+
+/* ===== Nút ===== */
+.link-button {
+    width: 90%;
+    max-width: 420px;
+    background: #1a1a1a;
+    border-radius: 16px;
+    padding: 15px;
+    margin: 18px auto;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.25s ease;
+    border: 1px solid #333;
+
+    /* Hiệu ứng glow nhẹ mặc định */
+    box-shadow: 0 0 0px #ff3e8a55;
+    animation: softGlow 3s infinite alternate ease-in-out;
+}
+
+.link-button:hover {
+    transform: scale(1.04);
+    border-color: #ff3e8a;
+    animation: hoverGlow 1.2s infinite alternate ease-in-out;
+
+    /* Rung nhẹ */
+    animation: shake 0.4s ease-in-out infinite, hoverGlow 1.2s infinite alternate;
+}
+
+/* ===== Logo ===== */
+.logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    margin-right: 15px;
+    background-size: cover;
+    background-position: center;
+    background-color: #222;
+
+    /* nhịp thở */
+    animation: pulse 2.5s infinite ease-in-out;
+}
+
+/* ===== Text info ===== */
+.info {
+    text-align: left;
+    flex: 1;
+}
+
+.name {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    background: #333;
+    border: 1px solid #444;
+
+    /* fade nhỏ */
+    animation: tagGlow 3s infinite alternate;
+}
+
+/* ===== Keyframes ===== */
+
+@keyframes softGlow {
+    0% { box-shadow: 0 0 3px #ff3e8a22; }
+    100% { box-shadow: 0 0 12px #ff3e8a55; }
+}
+
+@keyframes hoverGlow {
+    0% { box-shadow: 0 0 10px #ff3e8a55; }
+    100% { box-shadow: 0 0 20px #ff3e8aa8; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+@keyframes tagGlow {
+    0% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    50% { transform: translateX(2px); }
+    75% { transform: translateX(-1px); }
+    100% { transform: translateX(0); }
+}
+/* ===== Nút trở về trang chủ ===== */
+#home-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #ff3e8a;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 0 12px #ff3e8a88;
+    z-index: 999;
+    transition: 0.25s ease;
+    animation: pulse 2.5s infinite ease-in-out;
+}
+
+#home-btn:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 18px #ff3e8acc;
+}
+
+/* ===== Responsive cho mobile ===== */
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+    .link-button {
+        width: 100%;
+        padding: 12px;
+        border-radius: 14px;
+        margin: 14px 0;
+    }
+
+    .logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+    }
+
+    .name {
+        font-size: 17px;
+        margin-bottom: 4px;
+    }
+
+    .tag {
+        font-size: 12px;
+        padding: 3px 6px;
+    }
+
+    .tags {
+        gap: 4px;
+    }
+}
