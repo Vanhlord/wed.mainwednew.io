@@ -264,3 +264,31 @@ function showPopup() {
 //phần gọi thông báo khi bắt đầu vào web
 document.addEventListener("DOMContentLoaded", showPopup);
 
+//đồng hồ và đếm ngược
+function updateTimers() {
+    const now = new Date();
+    
+    // 1. Hiển thị thời gian hiện tại
+    document.getElementById('current-time').innerText = now.toLocaleTimeString('vi-VN');
+
+    // 2. Tính toán đếm ngược (Mốc: 17/07/2026)
+    const targetDate = new Date('July 17, 2026 00:00:00').getTime();
+    const distance = targetDate - now.getTime();
+
+    if (distance < 0) {
+        document.getElementById('countdown-timer').innerText = "SERVER ĐÃ MỞ!";
+        return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById('countdown-timer').innerText = 
+        `${days}:${hours}:${minutes}:${seconds}`;
+}
+
+// Cập nhật mỗi giây một lần
+setInterval(updateTimers, 1000);
+updateTimers(); // Chạy ngay lập tức khi load trang
