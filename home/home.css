@@ -371,6 +371,11 @@ footer p {
   background: #ff3b3b;
   box-shadow: 0 0 10px #ff3b3b;
 }
+
+#current-time, #countdown-timer {
+    font-family: 'Courier New', Courier, monospace; /* Kiểu số nhìn cho công nghệ */
+    margin-left: 5px;
+}
 /* 📱 Responsive cho mobile */
 @media (max-width: 768px) {
   header {
