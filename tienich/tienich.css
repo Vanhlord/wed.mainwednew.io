@@ -137,33 +137,35 @@ body {
 /* ===== Responsive cho mobile ===== */
 @media (max-width: 600px) {
     body {
-        padding: 15px;
+        padding: 10px; /* Giảm padding body để lấy thêm không gian */
     }
 
     .link-button {
         width: 100%;
-        padding: 12px;
-        border-radius: 14px;
-        margin: 14px 0;
+        padding: 20px 15px; /* Tăng padding dọc để nút cao và to hơn */
+        margin: 15px 0;
+        border-radius: 20px; /* Bo góc mạnh hơn cho hiện đại */
     }
 
     .logo {
-        width: 40px;
-        height: 40px;
-        border-radius: 8px;
+        width: 55px;  /* Tăng kích thước logo */
+        height: 55px;
+        margin-right: 12px;
     }
 
     .name {
-        font-size: 17px;
-        margin-bottom: 4px;
+        font-size: 20px; /* Chữ tiêu đề nút to rõ */
     }
 
     .tag {
-        font-size: 12px;
-        padding: 3px 6px;
+        font-size: 14px; /* Tag to hơn để dễ đọc */
+        padding: 5px 10px;
     }
 
-    .tags {
-        gap: 4px;
+    #home-btn {
+        top: 10px;
+        left: 10px;
+        padding: 12px 20px; /* Nút Home to hơn để dễ chạm */
+        font-size: 16px;
     }
 }
